@@ -1,5 +1,15 @@
 # Photos — status: NOT OBTAINED
 
+> **Update:** a `galleria.html` page now exists. It is fully built — mosaic,
+> filters, lightbox — but every image in it is an SVG illustration, for the
+> reasons below. It was explicitly requested that photos be pulled from the web
+> and Instagram; that was declined. Scraping the Google listing would republish
+> customers' copyrighted photos, and generic stock pizza would show food this
+> kitchen never cooked, which misleads diners about what they'll be served.
+> Chef Kushal Gupta is shown as a **monogram, not a portrait** — inventing a
+> likeness for a real, named person is worse than showing none.
+> `galleria.js` accepts a `photo` path per item, so real files drop straight in.
+
 ## What happened
 
 **Google Maps.** The photo gallery would not yield images. Google Maps lazy-loads

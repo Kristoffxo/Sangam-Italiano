@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Galleria — Sangam Italiano</title>
+<meta name="description" content="The dishes, the oven, the room. Sangam Italiano, Lukerganj, Prayagraj.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="galleria.css">
+<script>
+try{var t=localStorage.getItem('sangam-theme')||'dark';
+    document.documentElement.setAttribute('data-theme',t);}catch(e){}
+</script>
+</head>
+<body>
+
+<!-- ══ DEV NOTE — delete before going live ══ -->
+<div class="devnote" id="devnote">
+  <strong>Illustrated placeholders</strong> — every plate below is drawn in SVG,
+  not photographed. Drop real files into <code>assets/</code> to replace them.
+  See <code>docs/PHOTOS-STATUS.md</code>.
+  <button type="button" data-close-devnote aria-label="Dismiss build note">&times;</button>
+</div>
+
+<div class="hungerbar" id="hungerbar"><span></span></div>
+
+<!-- ══ NAV ══ -->
+<header class="nav" id="nav">
+  <a href="index.html" class="nav__mark">
+    <span class="nav__mark-s">Sangam</span><span class="nav__mark-i">Italiano</span>
+  </a>
+  <nav class="nav__links" id="navLinks" aria-label="Main">
+    <a href="index.html#forge">Build a pizza</a>
+    <a href="index.html#menu">Menu</a>
+    <a href="galleria.html" aria-current="page">Galleria</a>
+    <a href="index.html#dough">The dough</a>
+    <a href="index.html#visit">Visit</a>
+  </nav>
+  <a class="nav__cta" href="tel:07701873473">
+    <span class="nav__cta-dot"></span><span class="nav__cta-txt">Book a table</span>
+    <svg class="nav__cta-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.1 2.2 2.9 4 5.1 5.1l1.9-1.9c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V19c0 .6-.4 1-1 1-8.3 0-15-6.7-15-15 0-.6.4-1 1-1h3.6c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.2 1l-2 2z" fill="currentColor"/></svg>
+  </a>
+  <button class="themetog" id="themeTog" aria-label="Switch to light mode" aria-pressed="false">
+    <svg class="themetog__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.6" fill="currentColor"/><g stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 2.4v2.3M12 19.3v2.3M2.4 12h2.3M19.3 12h2.3M5.2 5.2l1.7 1.7M17.1 17.1l1.7 1.7M18.8 5.2l-1.7 1.7M6.9 17.1l-1.7 1.7"/></g></svg>
+    <svg class="themetog__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 15.2A9 9 0 019.3 3.9a9 9 0 107.3 14.4 9.05 9.05 0 013.9-3.1z" fill="currentColor"/></svg>
+  </button>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main>
+
+<!-- ══ HEADER ══ -->
+<section class="gtop">
+  <p class="eyebrow reveal">Galleria</p>
+  <h1 class="gtop__h1 reveal" style="--d:.06s">
+    Everything that <span class="gtop__em">comes out</span> of that oven
+  </h1>
+  <p class="sec-lede reveal" style="--d:.14s">
+    The plates, the fire itself, and the room they're eaten in.
+    Tap any of them to see it properly.
+  </p>
+</section>
+
+<!-- ══ FILTERS ══ -->
+<div class="gbar reveal">
+  <div class="tabs" id="galFilters" role="tablist" aria-label="Filter the gallery"></div>
+  <p class="gbar__count" id="galCount"></p>
+</div>
+
+<!-- ══ MOSAIC ══ -->
+<ul class="mosaic" id="mosaic"></ul>
+
+<!-- ══ REAL PHOTOGRAPHY CALLOUT ══ -->
+<section class="pcall">
+  <div class="pcall__box reveal">
+    <p class="eyebrow">Read this before you swap these out</p>
+    <h2 class="pcall__h2">These are drawings, on purpose</h2>
+    <p>
+      No licensable photography of Sangam Italiano exists yet. The pictures on
+      the Google listing were taken by <em>customers</em> — they belong to those
+      customers, not the restaurant, and publishing them here would be
+      infringement. Generic pizza photos from a stock library would be worse:
+      they'd show food this kitchen never cooked.
+    </p>
+    <p>
+      So every plate here is drawn in SVG. It's honest, it weighs nothing, and
+      it stays sharp on any screen.
+    </p>
+    <h3 class="pcall__h3">To put real photos in</h3>
+    <ol class="pcall__ol">
+      <li>Ask Chef Kushal Gupta for the <b>original files</b> — the restaurant
+          already owns the photography on its own Instagram. Originals, not
+          Instagram downloads, which are re-compressed.</li>
+      <li>Drop them into an <code>assets/</code> folder.</li>
+      <li>Add a <code>photo</code> path to that dish's entry in
+          <code>galleria.js</code>. Each tile already checks for one and will
+          use it instead of the drawing — no other change needed.</li>
+    </ol>
+    <p class="pcall__fine">
+      If you'd rather shoot fresh: six frames carry a restaurant site — exterior
+      at dusk, the oven mid-service, the sofa swing, two plated dishes, one wide
+      shot of the room.
+    </p>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ LIGHTBOX ══ -->
+<div class="lbox" id="lbox" hidden role="dialog" aria-modal="true" aria-label="Gallery viewer">
+  <button class="lbox__x" id="lboxClose" aria-label="Close viewer">&times;</button>
+  <button class="lbox__nav lbox__nav--prev" id="lboxPrev" aria-label="Previous">&#8249;</button>
+  <button class="lbox__nav lbox__nav--next" id="lboxNext" aria-label="Next">&#8250;</button>
+  <figure class="lbox__fig">
+    <div class="lbox__art" id="lboxArt"></div>
+    <figcaption class="lbox__cap">
+      <p class="lbox__kicker" id="lboxKicker"></p>
+      <h2 class="lbox__title" id="lboxTitle"></h2>
+      <p class="lbox__desc" id="lboxDesc"></p>
+      <p class="lbox__n" id="lboxN"></p>
+    </figcaption>
+  </figure>
+</div>
+
+<footer class="foot">
+  <p class="foot__mark">Sangam Italiano</p>
+  <p class="foot__small">
+    Lukerganj, Prayagraj &middot; <a href="index.html">Back to the restaurant</a>
+    <br>Illustrations drawn in SVG. No stock photography, no borrowed images.
+    <br>FSSAI licence number required here before launch.
+  </p>
+</footer>
+
+<script src="galleria.js"></script>
+</body>
+</html>

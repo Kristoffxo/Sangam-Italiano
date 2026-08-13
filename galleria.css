@@ -1,0 +1,175 @@
+/* Galleria — page-specific. Inherits every token from styles.css. */
+
+/* ── header ── */
+.gtop{padding:clamp(30px,6vw,70px) var(--pad) clamp(24px,4vw,42px);max-width:1400px;margin:0 auto}
+.gtop__h1{font-size:clamp(38px,7.5vw,92px);font-weight:900;letter-spacing:-.04em;max-width:20ch}
+.gtop__em{
+  background:linear-gradient(180deg,var(--gold),var(--ember) 45%,var(--tomato));
+  -webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic
+}
+[data-theme="light"] .gtop__em{
+  background:linear-gradient(180deg,var(--gold),#C4551F 45%,var(--tomato));
+  -webkit-background-clip:text;background-clip:text
+}
+
+/* ── filter bar ── */
+.gbar{
+  display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
+  padding:0 var(--pad) 24px;max-width:1400px;margin:0 auto;
+  position:sticky;top:0;z-index:20;
+  background:linear-gradient(var(--bg) 62%,transparent);padding-top:14px
+}
+.gbar__count{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin:0}
+
+/* ── mosaic ── */
+.mosaic{
+  list-style:none;margin:0 auto;padding:0 var(--pad) clamp(50px,8vw,100px);max-width:1400px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;grid-auto-flow:dense
+}
+/* The <li> is the grid item — spans must live there, not on the button. */
+.mosaic li{position:relative;min-width:0;list-style:none;aspect-ratio:1}
+.mosaic li.sp-w2{grid-column:span 2;aspect-ratio:2/1}
+.mosaic li.sp-h2{grid-row:span 2;aspect-ratio:auto}
+.mosaic li.sp-w2.sp-h2{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+.tile{
+  position:absolute;inset:0;border:0;padding:0;margin:0;background:var(--bg2);
+  border-radius:16px;overflow:hidden;cursor:pointer;text-align:left;
+  width:100%;height:100%;display:block;
+  transition:transform .45s cubic-bezier(.2,.7,.3,1),box-shadow .45s,opacity .4s
+}
+/* extra bottom padding lifts the plate clear of the caption band;
+   wide tiles get less padding or the square art reads too small */
+.tile__art{position:absolute;inset:0;display:grid;place-items:center;padding:9% 9% 22%}
+.mosaic li.sp-w2:not(.sp-h2) .tile__art{padding:3% 3% 12%}
+.tile__art svg,.tile__art img{width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .6s cubic-bezier(.2,.7,.3,1)}
+.tile__scrim{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,rgba(var(--bg-rgb),.92) 0%,rgba(var(--bg-rgb),.35) 34%,transparent 62%);
+  opacity:.9;transition:opacity .4s
+}
+.tile__meta{position:absolute;left:0;right:0;bottom:0;padding:16px 17px;pointer-events:none}
+.tile__k{
+  display:block;
+  font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+  margin:0 0 4px;font-weight:500
+}
+.tile__t{display:block;font-family:var(--disp);font-size:clamp(14px,1.3vw,19px);font-weight:600;margin:0;line-height:1.15}
+.tile__zoom{
+  position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:50%;
+  background:rgba(var(--fg-rgb),.14);backdrop-filter:blur(6px);
+  display:grid;place-items:center;opacity:0;scale:.7;transition:.35s cubic-bezier(.2,1.4,.4,1)
+}
+.tile__zoom svg{width:14px;height:14px;stroke:var(--fg);fill:none;stroke-width:2}
+.tile--placeholder .tile__k::after{content:" · drawn";opacity:.6}
+
+@media (hover:hover){
+  .tile:hover{transform:translateY(-5px);box-shadow:0 22px 44px var(--shadow)}
+  .tile:hover .tile__art svg,.tile:hover .tile__art img{transform:scale(1.07)}
+  .tile:hover .tile__zoom{opacity:1;scale:1}
+  .tile:hover .tile__scrim{opacity:1}
+  .mosaic--hovering .tile:not(:hover){opacity:.62}
+}
+.tile:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.tile:active{transform:scale(.985)}
+
+/* enter animation */
+.tile{opacity:0;transform:translateY(24px) scale(.97)}
+.tile--in{opacity:1;transform:none;transition:opacity .7s cubic-bezier(.2,.7,.3,1) var(--d,0s),transform .7s cubic-bezier(.2,.7,.3,1) var(--d,0s)}
+.mosaic li.tile--hidden{display:none}
+
+@media(max-width:900px){
+  .mosaic{grid-template-columns:repeat(3,1fr);gap:11px}
+}
+@media(max-width:640px){
+  .mosaic{grid-template-columns:repeat(2,1fr);gap:9px;padding-bottom:56px}
+  /* At two columns a 2:1 banner letterboxes the square art far too small.
+     Everything goes square; the hero becomes a full-width square instead. */
+  .mosaic li.sp-w2:not(.sp-h2){grid-column:span 1;aspect-ratio:1}
+  .mosaic li.sp-h2:not(.sp-w2){grid-row:span 1;aspect-ratio:1}
+  .mosaic li.sp-w2.sp-h2{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+  .mosaic li.sp-w2:not(.sp-h2) .tile__art{padding:9% 9% 22%}
+  .tile__meta{padding:11px 12px}
+  .tile__t{font-size:13px}
+  .tile__zoom{display:none}
+  .gbar{padding-bottom:16px}
+  .gtop{padding-top:14px}
+}
+
+/* ── lightbox ── */
+.lbox{
+  position:fixed;inset:0;z-index:90;display:grid;place-items:center;
+  background:rgba(var(--bg-rgb),.96);backdrop-filter:blur(16px);
+  padding:clamp(16px,4vw,54px);animation:lbIn .3s ease
+}
+.lbox[hidden]{display:none}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+.lbox__fig{
+  margin:0;display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(20px,4vw,48px);
+  align-items:center;max-width:1140px;width:100%
+}
+.lbox__art{
+  background:var(--bg2);border-radius:20px;overflow:hidden;aspect-ratio:1;
+  display:grid;place-items:center;padding:5%;
+  box-shadow:0 30px 70px var(--shadow);animation:lbPop .42s cubic-bezier(.2,1.2,.35,1)
+}
+@keyframes lbPop{from{transform:scale(.93);opacity:0}to{transform:none;opacity:1}}
+.lbox__art svg,.lbox__art img{width:100%;height:100%;object-fit:cover}
+.lbox__kicker{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0 0 12px;font-weight:500}
+.lbox__title{font-size:clamp(26px,4vw,50px);letter-spacing:-.025em;margin:0 0 16px}
+.lbox__desc{color:var(--fg2);font-size:clamp(14px,1.5vw,17px);margin:0;max-width:42ch}
+.lbox__n{font-family:var(--disp);color:var(--mute);font-size:13px;margin:22px 0 0;font-variant-numeric:tabular-nums}
+.lbox__x{
+  position:absolute;top:clamp(10px,2vw,22px);right:clamp(10px,2vw,22px);
+  width:44px;height:44px;border-radius:50%;border:1px solid rgba(var(--fg-rgb),.2);
+  background:rgba(var(--fg-rgb),.06);color:var(--fg);font-size:26px;line-height:1;transition:.24s
+}
+.lbox__x:hover{background:var(--fg);color:var(--bg)}
+.lbox__nav{
+  position:absolute;top:50%;translate:0 -50%;width:48px;height:48px;border-radius:50%;
+  border:1px solid rgba(var(--fg-rgb),.2);background:rgba(var(--fg-rgb),.06);
+  color:var(--fg);font-size:26px;line-height:1;transition:.24s
+}
+.lbox__nav:hover{background:var(--fg);color:var(--bg)}
+.lbox__nav--prev{left:clamp(8px,2vw,22px)}
+.lbox__nav--next{right:clamp(8px,2vw,22px)}
+@media(max-width:820px){
+  .lbox__fig{grid-template-columns:1fr;gap:20px;max-width:520px}
+  .lbox__art{aspect-ratio:1}
+  .lbox__nav{top:auto;bottom:clamp(10px,3vw,20px);translate:0 0}
+  .lbox__desc{font-size:14px}
+  .lbox__n{margin-top:12px}
+}
+@media(max-width:640px){
+  .lbox{padding:14px}
+  .lbox__title{font-size:23px;margin-bottom:10px}
+  .lbox__art{padding:4%;border-radius:14px}
+  .lbox__x{width:38px;height:38px;font-size:22px}
+  .lbox__nav{width:42px;height:42px}
+}
+body.lboxopen{overflow:hidden}
+
+/* ── photography callout ── */
+.pcall{padding:0 var(--pad) clamp(60px,9vw,120px);max-width:1400px;margin:0 auto}
+.pcall__box{
+  background:var(--bg2);border:1px solid rgba(var(--fg-rgb),.1);
+  border-left:3px solid var(--gold);border-radius:0 16px 16px 0;
+  padding:clamp(24px,4vw,44px);max-width:74ch
+}
+.pcall__h2{font-size:clamp(24px,3.4vw,38px);margin:0 0 16px}
+.pcall__h3{font-family:var(--disp);font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:28px 0 12px;font-weight:500}
+.pcall__box p{color:var(--fg2);font-size:15px;margin:0 0 14px}
+.pcall__ol{color:var(--fg2);font-size:15px;margin:0;padding-left:20px;display:grid;gap:10px}
+.pcall__ol b{color:var(--fg);font-weight:600}
+.pcall__fine{font-size:13.5px!important;color:var(--mute)!important;margin:22px 0 0!important;font-style:italic}
+.pcall__box code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;
+  background:rgba(var(--fg-rgb),.08);padding:2px 6px;border-radius:5px
+}
+.foot__small a{color:var(--gold);text-decoration:none;border-bottom:1px solid transparent}
+.foot__small a:hover{border-color:var(--gold)}
+
+@media (prefers-reduced-motion:reduce){
+  .tile{opacity:1;transform:none}
+  .lbox,.lbox__art{animation:none}
+}

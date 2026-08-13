@@ -25,6 +25,9 @@ Every push to `main` redeploys automatically.
   flames rise, the stone climbs 24°C → 450°C, a 90-second clock runs, then char
   spots bloom on the crust and steam lifts off.
 - **Menu** — category tabs, vegetarian-only toggle, hand-drawn SVG per dish.
+- **Galleria** (`galleria.html`) — 15-tile mosaic with column/row spans, category
+  filters, and a lightbox with prev/next, arrow keys, Escape, backdrop click and
+  touch swipe. Every plate is an SVG illustration; see the note below.
 - **Dough timeline** — the 48-hour ferment, revealed on scroll, dough ball
   growing at each stage.
 - **The room** — a sofa swing you can push (click it) and a music visualiser.
@@ -70,7 +73,17 @@ and it stays sharp at any screen size. Total page weight is under 60 KB.
 **To add real photos**, get the original files from Chef Kushal Gupta — the
 restaurant already owns the photography on its own Instagram. Ask for
 full-resolution originals, not Instagram downloads (those are re-compressed).
-Then drop them in an `assets/` folder and swap in `<img>` where you want them.
+
+Then drop them in an `assets/` folder and add a `photo` path to the relevant
+entry in `galleria.js`:
+
+```js
+{ id:'margherita', cat:'Pizza', t:'Margherita', photo:'assets/margherita.jpg', ... }
+```
+
+Each tile already checks for `photo` and renders an `<img>` instead of the
+drawing when it's present — nothing else needs changing, and you can mix photos
+and illustrations while they trickle in.
 
 ## Before this goes live
 
