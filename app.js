@@ -1,6 +1,7 @@
 /* Sangam Italiano — interactions. Vanilla JS, no dependencies.
-   NOTE: every price in this file is a PLACEHOLDER. Replace with the
-   kitchen's real menu before launch. */
+   NOTE: the pizza builder is deliberately money-free — it's a toy, not a
+   checkout. Menu prices below ARE placeholders; replace with the kitchen's
+   real card before launch. */
 (() => {
 'use strict';
 const $ = (s, r = document) => r.querySelector(s);
@@ -100,33 +101,33 @@ $('#marqueeTrack').innerHTML = [...WORDS, ...WORDS]
 
 /* ══ THE FORGE ═══════════════════════════════════════ */
 const BASES = [
-  { id: 'marg',  name: 'La Margherita', price: 340, veg: true,  sauce: '#C6402A' },
-  { id: 'mari',  name: 'La Marinara',   price: 290, veg: true,  sauce: '#B93A22' },
-  { id: 'bianca',name: 'La Bianca',     price: 360, veg: true,  sauce: '#EDE0C4' }
+  { id: 'marg',  name: 'La Margherita', tag: 'the benchmark',   veg: true,  sauce: '#C6402A' },
+  { id: 'mari',  name: 'La Marinara',   tag: 'no cheese',       veg: true,  sauce: '#B93A22' },
+  { id: 'bianca',name: 'La Bianca',     tag: 'white, no sauce', veg: true,  sauce: '#EDE0C4' }
 ];
 const TOPS = [
-  { id:'fdl',  name:'Fior di latte', price:70,  veg:true,
+  { id:'fdl',  name:'Fior di latte', note:'milky',  veg:true,
     art:'<ellipse cx="12" cy="12" rx="9" ry="7" fill="#FFF8E7"/><ellipse cx="9" cy="10" rx="2.4" ry="1.8" fill="#F0E4C8"/>',
     draw:(x,y)=>`<ellipse cx="${x}" cy="${y}" rx="${rnd(13,18)}" ry="${rnd(10,14)}" fill="#FFF8E7" opacity=".95"/>` },
-  { id:'basil',name:'Garden basil', price:30, veg:true,
+  { id:'basil',name:'Garden basil', note:'fresh', veg:true,
     art:'<path d="M12 3C8 6 6 9 6 13a6 6 0 0012 0c0-4-2-7-6-10z" fill="#5E8F4E"/>',
     draw:(x,y)=>`<g transform="translate(${x},${y}) rotate(${rnd(0,360)})"><path d="M0 -13C-5 -7 -7 -3 -7 2a7 7 0 0014 0c0-5-2-9-7-15z" fill="#4E7F42"/><path d="M0 -13V4" stroke="#38602D" stroke-width="1.4"/></g>` },
-  { id:'funghi',name:'Funghi', price:80, veg:true,
+  { id:'funghi',name:'Funghi', note:'earthy', veg:true,
     art:'<path d="M4 12a8 8 0 0116 0z" fill="#C9A98A"/><rect x="10" y="12" width="4" height="8" rx="2" fill="#E8D9C2"/>',
     draw:(x,y)=>`<g transform="translate(${x},${y}) rotate(${rnd(-30,30)})"><ellipse cx="0" cy="0" rx="12" ry="7" fill="#A8825F"/><ellipse cx="-3" cy="-2" rx="4" ry="2.4" fill="#C09A76"/></g>` },
-  { id:'truffle',name:'Truffle oil', price:120, veg:true,
+  { id:'truffle',name:'Truffle oil', note:'musky', veg:true,
     art:'<circle cx="12" cy="13" r="7" fill="#3B2E22"/><circle cx="10" cy="11" r="1.6" fill="#5C4A38"/>',
     draw:(x,y)=>`<g transform="translate(${x},${y})"><ellipse cx="0" cy="0" rx="8" ry="5" fill="#3B2E22"/><ellipse cx="-2" cy="-1" rx="2" ry="1.3" fill="#5C4A38"/></g>` },
-  { id:'olive',name:'Black olives', price:45, veg:true,
+  { id:'olive',name:'Black olives', note:'briny', veg:true,
     art:'<ellipse cx="12" cy="12" rx="7" ry="5.5" fill="#2E2A38"/><ellipse cx="12" cy="12" rx="2.4" ry="1.8" fill="#C6402A"/>',
     draw:(x,y)=>`<g transform="translate(${x},${y}) rotate(${rnd(0,180)})"><ellipse rx="8" ry="6" fill="#2E2A38"/><ellipse rx="2.6" ry="2" fill="#8E3B25"/></g>` },
-  { id:'chilli',name:'Calabrian chilli', price:35, veg:true,
+  { id:'chilli',name:'Calabrian chilli', note:'hot', veg:true,
     art:'<path d="M8 5c6 1 9 6 8 13-4 1-8-3-8-13z" fill="#C6402A"/>',
     draw:(x,y)=>`<g transform="translate(${x},${y}) rotate(${rnd(0,360)})"><path d="M-6 -7c7 1 10 7 9 15-5 1-9-4-9-15z" fill="#BE3A24"/></g>` },
-  { id:'parm', name:'Parmigiano', price:60, veg:true,
+  { id:'parm', name:'Parmigiano', note:'sharp', veg:true,
     art:'<path d="M4 16l8-9 8 9z" fill="#F2E3BE"/>',
     draw:(x,y)=>`<g transform="translate(${x},${y}) rotate(${rnd(0,360)})"><path d="M-7 5L0 -6 7 5z" fill="#F2E3BE" opacity=".92"/></g>` },
-  { id:'salame',name:'Salame', price:110, veg:false,
+  { id:'salame',name:'Salame', note:'cured', veg:false,
     art:'<circle cx="12" cy="12" r="8" fill="#B3453C"/><circle cx="9" cy="10" r="1.4" fill="#F0DCCF"/><circle cx="14" cy="14" r="1.6" fill="#F0DCCF"/>',
     draw:(x,y)=>`<g transform="translate(${x},${y})"><circle r="${rnd(11,15)}" fill="#A83E36"/><circle cx="-4" cy="-3" r="2.2" fill="#EAD3C4"/><circle cx="4" cy="4" r="2.6" fill="#EAD3C4"/><circle cx="5" cy="-5" r="1.8" fill="#EAD3C4"/></g>` }
 ];
@@ -137,12 +138,12 @@ let state = 'idle';
 
 const chips = $('#baseChips'), grid = $('#topGrid');
 chips.innerHTML = BASES.map(b =>
-  `<button type="button" class="chip${b.id === base.id ? ' chip--on' : ''}" data-base="${b.id}">${b.name} &middot; &#8377;${b.price}</button>`).join('');
+  `<button type="button" class="chip${b.id === base.id ? ' chip--on' : ''}" data-base="${b.id}">${b.name}<em>${b.tag}</em></button>`).join('');
 grid.innerHTML = TOPS.map(t =>
   `<button type="button" class="top" data-top="${t.id}" aria-pressed="false">
      <span class="top__n" data-n="${t.id}">0</span>
      <svg viewBox="0 0 24 24" aria-hidden="true">${t.art}</svg>
-     <b>${t.name}</b><small>+&#8377;${t.price}</small>
+     <b>${t.name}</b><small>${t.note}</small>
    </button>`).join('');
 
 /* place a topping inside the sauce circle, roughly evenly */
@@ -158,28 +159,32 @@ function nameIt() {
   return base.name + ' ' + (ids.length > 2 ? 'Completa' : 'con ' + bits.join(' e '));
 }
 
-function total() {
-  let n = base.price;
-  picked.forEach((q, id) => { n += TOPS.find(t => t.id === id).price * q; });
+/* how loaded the pizza is — replaces the old money total */
+function load() {
+  let n = 0;
+  picked.forEach(q => { n += q; });
   return n;
 }
 
+/* a Neapolitan's opinion of what you've done, instead of a bill */
+function verdict() {
+  const n = load();
+  if (n === 0) return 'Purist';
+  if (n <= 2) return 'Classico';
+  if (n <= 4) return 'Generous';
+  if (n <= 7) return 'Ambitious';
+  return 'Naples would riot';
+}
+
 function paintTicket() {
-  const lines = [`<li><span>${base.name}</span><span>&#8377;${base.price}</span></li>`];
+  const lines = [`<li><span>${base.name}</span><span>${base.tag}</span></li>`];
   picked.forEach((q, id) => {
     const t = TOPS.find(x => x.id === id);
-    lines.push(`<li><span>${t.name}${q > 1 ? ' &times;' + q : ''}</span><span>&#8377;${t.price * q}</span></li>`);
+    lines.push(`<li><span>${t.name}${q > 1 ? ' &times;' + q : ''}</span><span>${t.note}</span></li>`);
   });
   $('#ticketLines').innerHTML = lines.join('');
   $('#ticketName').textContent = nameIt();
-  const el = $('#ticketTotal'), to = total(), from = +el.textContent || 0;
-  if (SOFT) { el.textContent = to; return; }
-  const t0 = performance.now();
-  (function tick(now) {
-    const p = Math.min((now - t0) / 380, 1);
-    el.textContent = Math.round(from + (to - from) * (1 - Math.pow(1 - p, 3)));
-    if (p < 1) requestAnimationFrame(tick);
-  })(t0);
+  $('#ticketVerdict').textContent = verdict();
 }
 
 function redrawSauce() {
@@ -268,7 +273,7 @@ $('#fireBtn').addEventListener('click', () => {
     const n = nameIt();
     $('#doneName').textContent = n;
     $('#doneLine').textContent =
-      `Ninety seconds at 450°C. ${picked.size ? picked.size + ' topping' + (picked.size > 1 ? 's' : '') : 'Bare and proud'} · ₹${total()}.`;
+      `Ninety seconds at 450°C. ${picked.size ? picked.size + ' topping' + (picked.size > 1 ? 's' : '') : 'Bare and proud'} · ${verdict()}.`;
     $('#forgeDone').hidden = false;
     btn.disabled = false;
   })(t0);

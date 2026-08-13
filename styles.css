@@ -241,6 +241,8 @@ img,svg{max-width:100%}
   background:transparent;color:var(--cream2);border:1px solid rgba(248,242,228,.22);
   border-radius:999px;padding:9px 16px;font-size:13px;transition:.22s
 }
+.chip em{font-style:normal;opacity:.55;margin-left:7px;font-size:11.5px}
+.chip--on em{opacity:.65}
 .chip:hover{border-color:var(--cream);color:var(--cream)}
 .chip--on{background:var(--cream);color:var(--ink);border-color:var(--cream);font-weight:500}
 .tops{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:9px}
@@ -270,8 +272,7 @@ img,svg{max-width:100%}
 .ticket__lines li span:last-child{color:var(--mute);font-variant-numeric:tabular-nums}
 .ticket__total{display:flex;justify-content:space-between;align-items:baseline;padding-top:12px;border-top:1px solid rgba(248,242,228,.12)}
 .ticket__total span{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
-.ticket__total strong{font-family:var(--disp);font-size:26px;font-variant-numeric:tabular-nums}
-.ticket__note{font-size:11px;color:var(--gold);margin:10px 0 0;letter-spacing:.02em}
+.ticket__total strong{font-family:var(--disp);font-size:21px;font-style:italic;color:var(--gold);text-align:right}
 .forge__acts{display:flex;flex-wrap:wrap;gap:11px;align-items:center}
 .forge__done{background:linear-gradient(140deg,rgba(198,63,43,.2),rgba(240,138,60,.1));border:1px solid rgba(240,138,60,.4);border-radius:14px;padding:22px;display:grid;gap:10px;justify-items:start}
 .forge__done-k{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0}
@@ -423,16 +424,21 @@ img,svg{max-width:100%}
   .nav{gap:10px}
   .nav__cta{margin-left:auto;padding:9px 14px;white-space:nowrap}
 
-  /* drawer replaces the vanished link row */
+  /* drawer replaces the vanished link row.
+     Anchored to the nav's own bottom edge (top:100%) rather than the
+     viewport — the devnote banner offsets the nav, so a fixed top:0 put
+     the links on top of the wordmark. */
   .nav__links{
-    display:grid;position:fixed;left:0;right:0;top:0;z-index:-1;
-    gap:2px;padding:76px 20px 22px;margin:0;
-    background:rgba(18,14,12,.97);backdrop-filter:blur(18px);
+    display:grid;position:absolute;top:100%;left:0;right:0;z-index:-1;
+    gap:2px;padding:14px 20px 20px;margin:0;
+    background:rgba(18,14,12,.98);backdrop-filter:blur(18px);
     box-shadow:0 20px 50px rgba(0,0,0,.55);
-    transform:translateY(-102%);transition:transform .42s cubic-bezier(.3,.8,.25,1);
+    transform:translateY(-104%);transition:transform .42s cubic-bezier(.3,.8,.25,1);
     visibility:hidden
   }
   .nav--open .nav__links{transform:translateY(0);visibility:visible}
+  /* opaque bar so the tucked-up drawer stays hidden behind it */
+  .nav--open{background:rgba(18,14,12,.98);backdrop-filter:blur(18px)}
   .nav__links a{
     font-family:var(--disp);font-size:22px;color:var(--cream);
     padding:13px 4px;border-bottom:1px solid rgba(248,242,228,.09)
