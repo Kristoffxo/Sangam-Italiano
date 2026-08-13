@@ -23,6 +23,19 @@ const onScroll = () => {
 };
 addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
+/* ── mobile drawer ───────────────────────────────── */
+const burger = $('#burger');
+const setNav = open => {
+  nav.classList.toggle('nav--open', open);
+  document.body.classList.toggle('navlock', open);
+  burger.setAttribute('aria-expanded', open);
+  burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+};
+burger.addEventListener('click', () => setNav(!nav.classList.contains('nav--open')));
+$$('#navLinks a').forEach(a => a.addEventListener('click', () => setNav(false)));
+addEventListener('keydown', e => { if (e.key === 'Escape') setNav(false); });
+matchMedia('(min-width:821px)').addEventListener('change', e => { if (e.matches) setNav(false); });
+
 /* ── cursor glow ─────────────────────────────────── */
 if (!SOFT && matchMedia('(pointer:fine)').matches) {
   const g = $('#glow');
@@ -41,9 +54,11 @@ const watch = () => $$('.reveal, .tl li').forEach(el => io.observe(el));
 
 /* ── floating basil ──────────────────────────────── */
 const LEAF = '<svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2C7 6 4 10 4 15a8 8 0 0016 0c0-5-3-9-8-13z" fill="#5E8F4E"/><path d="M12 4v16" stroke="#3E6B33" stroke-width="1.2"/></svg>';
+// fewer particles on phones — same look, far less compositing per frame
+const PHONE = innerWidth < 641;
 if (!SOFT) {
   const box = $('#leaves');
-  for (let i = 0; i < 14; i++) {
+  for (let i = 0; i < (PHONE ? 6 : 14); i++) {
     const d = document.createElement('div');
     d.className = 'leaf';
     d.innerHTML = LEAF;
@@ -56,7 +71,7 @@ if (!SOFT) {
     box.appendChild(d);
   }
   const sp = $('#sparks');
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < (PHONE ? 9 : 20); i++) {
     const s = document.createElement('span');
     s.className = 'spark';
     s.style.left = rnd(26, 74) + '%';

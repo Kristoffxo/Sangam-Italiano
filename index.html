@@ -35,7 +35,7 @@
   <a href="#top" class="nav__mark">
     <span class="nav__mark-s">Sangam</span><span class="nav__mark-i">Italiano</span>
   </a>
-  <nav class="nav__links" aria-label="Main">
+  <nav class="nav__links" id="navLinks" aria-label="Main">
     <a href="#forge">Build a pizza</a>
     <a href="#menu">Menu</a>
     <a href="#dough">The dough</a>
@@ -43,8 +43,11 @@
     <a href="#visit">Visit</a>
   </nav>
   <a class="nav__cta" href="tel:07701873473">
-    <span class="nav__cta-dot"></span>Book a table
+    <span class="nav__cta-dot"></span><span class="nav__cta-txt">Book a table</span>
   </a>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
 </header>
 
 <main id="top">
