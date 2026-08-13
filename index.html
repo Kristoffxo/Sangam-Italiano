@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sangam Italiano — Wood-Fired Napoletana in Prayagraj</title>
+<meta name="description" content="Handmade ravioli, 48-hour fermented Napoletana dough, wood-fired pizza. Lukerganj, Prayagraj. Founded by Chef Kushal Gupta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ══ DEV NOTE — delete this block before going live ══ -->
+<div class="devnote" id="devnote">
+  <strong>Build note</strong> — prices, hours and dish list are <em>placeholders</em>.
+  Confirm with Chef Kushal Gupta before launch. See RESEARCH.md.
+  <button type="button" data-close-devnote aria-label="Dismiss build note">&times;</button>
+</div>
+
+<!-- ══ PRELOADER ══ -->
+<div class="preload" id="preload" aria-hidden="true">
+  <svg viewBox="0 0 120 120" class="preload__dough">
+    <circle cx="60" cy="60" r="34" class="preload__ball"></circle>
+  </svg>
+  <p class="preload__word">stretching the dough</p>
+</div>
+
+<div class="hungerbar" id="hungerbar"><span></span></div>
+<div class="glow" id="glow" aria-hidden="true"></div>
+
+<!-- ══ NAV ══ -->
+<header class="nav" id="nav">
+  <a href="#top" class="nav__mark">
+    <span class="nav__mark-s">Sangam</span><span class="nav__mark-i">Italiano</span>
+  </a>
+  <nav class="nav__links" aria-label="Main">
+    <a href="#forge">Build a pizza</a>
+    <a href="#menu">Menu</a>
+    <a href="#dough">The dough</a>
+    <a href="#room">The room</a>
+    <a href="#visit">Visit</a>
+  </nav>
+  <a class="nav__cta" href="tel:07701873473">
+    <span class="nav__cta-dot"></span>Book a table
+  </a>
+</header>
+
+<main id="top">
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero__heat" aria-hidden="true"></div>
+  <div class="hero__leaves" id="leaves" aria-hidden="true"></div>
+
+  <div class="hero__inner">
+    <div class="hero__copy">
+      <p class="eyebrow reveal">Lukerganj &middot; Prayagraj &middot; est. 2025</p>
+      <h1 class="hero__h1">
+        <span class="reveal" style="--d:.05s">Ninety</span>
+        <span class="reveal" style="--d:.12s">seconds</span>
+        <span class="reveal" style="--d:.19s">in</span>
+        <span class="reveal hero__flame" style="--d:.26s">fire.</span>
+      </h1>
+      <p class="hero__sub reveal" style="--d:.34s">
+        Dough rested forty-eight hours. San Marzano crushed by hand.
+        A stone floor at 450&deg;C. That is the whole trick — there is no other trick.
+      </p>
+      <div class="hero__acts reveal" style="--d:.42s">
+        <a class="btn btn--fill" href="#forge">Build your own <span aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn--ghost" href="#menu">See the menu</a>
+      </div>
+      <dl class="hero__stats reveal" style="--d:.5s">
+        <div><dt>4.4&#9733;</dt><dd>112 Google reviews</dd></div>
+        <div><dt>48h</dt><dd>cold fermentation</dd></div>
+        <div><dt>450&deg;</dt><dd>wood-fired stone</dd></div>
+      </dl>
+    </div>
+
+    <div class="hero__stage">
+      <div class="oven" id="oven">
+        <svg viewBox="0 0 420 420" class="oven__svg" aria-label="A wood-fired oven with a pizza turning inside">
+          <defs>
+            <radialGradient id="mouthGlow" cx="50%" cy="62%" r="55%">
+              <stop offset="0%" stop-color="#FFD27A"/>
+              <stop offset="45%" stop-color="#F0842E"/>
+              <stop offset="100%" stop-color="#5B1607"/>
+            </radialGradient>
+            <linearGradient id="domeG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3A2C24"/>
+              <stop offset="100%" stop-color="#1B1310"/>
+            </linearGradient>
+            <clipPath id="mouthClip"><path d="M96 300 Q210 118 324 300 Z"/></clipPath>
+          </defs>
+          <ellipse cx="210" cy="352" rx="176" ry="30" class="oven__shadow"/>
+          <path d="M60 320 Q210 74 360 320 Z" fill="url(#domeG)"/>
+          <path d="M96 300 Q210 118 324 300 Z" fill="url(#mouthGlow)" class="oven__mouth"/>
+          <g clip-path="url(#mouthClip)">
+            <g class="oven__fire">
+              <path class="flame f1" d="M120 300 q10-46 26-62 q4 30 18 44 q-6 26 -14 18 z"/>
+              <path class="flame f2" d="M170 300 q14-58 32-76 q6 36 22 54 q-8 32 -20 22 z"/>
+              <path class="flame f3" d="M232 300 q12-50 30-66 q4 32 20 48 q-8 28 -20 18 z"/>
+              <path class="flame f4" d="M284 300 q8-38 22-52 q4 24 14 36 q-6 22 -12 16 z"/>
+            </g>
+            <g class="oven__pie" id="ovenPie">
+              <ellipse cx="210" cy="278" rx="74" ry="20" fill="#E2AC5C"/>
+              <ellipse cx="210" cy="274" rx="62" ry="15" fill="#B9412C"/>
+              <ellipse cx="196" cy="272" rx="9" ry="4" fill="#FFF6E2"/>
+              <ellipse cx="224" cy="276" rx="8" ry="3.5" fill="#FFF6E2"/>
+            </g>
+          </g>
+          <rect x="52" y="312" width="316" height="26" rx="8" fill="#251A15"/>
+          <rect x="40" y="336" width="340" height="18" rx="9" fill="#160F0C"/>
+        </svg>
+        <div class="oven__sparks" id="sparks" aria-hidden="true"></div>
+      </div>
+      <p class="oven__cap">the fire never goes out before service</p>
+    </div>
+  </div>
+
+  <a href="#forge" class="scrollcue" aria-label="Scroll down">
+    <span></span><em>keep going, it gets better</em>
+  </a>
+</section>
+
+<!-- ══ MARQUEE ══ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track" id="marqueeTrack"></div>
+</div>
+
+<!-- ══ THE FORGE ══ -->
+<section class="forge" id="forge">
+  <div class="sec-head">
+    <p class="eyebrow reveal">The interactive bit</p>
+    <h2 class="sec-h2 reveal">Build it. Then burn it.</h2>
+    <p class="sec-lede reveal">
+      Tap a topping and watch it land. Load it up, then send it into the fire and
+      wait the ninety seconds like everyone else.
+    </p>
+  </div>
+
+  <div class="forge__grid">
+    <!-- pizza stage -->
+    <div class="forge__stage reveal">
+      <div class="peel" id="peel">
+        <svg viewBox="0 0 400 400" class="pizza" id="pizza" aria-label="Your pizza in progress">
+          <defs>
+            <radialGradient id="crustG" cx="50%" cy="45%" r="60%">
+              <stop offset="0%" stop-color="#F0C078"/>
+              <stop offset="100%" stop-color="#DFA24F"/>
+            </radialGradient>
+            <radialGradient id="sauceG" cx="45%" cy="40%" r="65%">
+              <stop offset="0%" stop-color="#CE4A31"/>
+              <stop offset="100%" stop-color="#A8331F"/>
+            </radialGradient>
+          </defs>
+          <circle cx="200" cy="200" r="178" fill="#C98F42" class="pz-rim"/>
+          <circle cx="200" cy="200" r="168" fill="url(#crustG)"/>
+          <circle cx="200" cy="200" r="146" fill="url(#sauceG)" class="pz-sauce"/>
+          <g id="pzToppings"></g>
+          <g id="pzChar" class="pz-char"></g>
+          <g id="pzSteam" class="pz-steam"></g>
+        </svg>
+        <div class="peel__flames" id="peelFlames" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div class="peel__stamp" id="stamp" aria-hidden="true">perfetto</div>
+      </div>
+
+      <div class="gauge" id="gauge">
+        <div class="gauge__row">
+          <span class="gauge__lbl">stone</span>
+          <strong class="gauge__val" id="tempVal">24&deg;C</strong>
+        </div>
+        <div class="gauge__bar"><span id="tempBar"></span></div>
+        <div class="gauge__row">
+          <span class="gauge__lbl">bake</span>
+          <strong class="gauge__val" id="timeVal">0s</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- controls -->
+    <div class="forge__panel reveal" style="--d:.12s">
+      <div class="forge__base" role="group" aria-label="Choose a base">
+        <span class="forge__legend">Start from</span>
+        <div class="chips" id="baseChips"></div>
+      </div>
+
+      <div class="forge__tops">
+        <span class="forge__legend">Add what you like</span>
+        <div class="tops" id="topGrid"></div>
+      </div>
+
+      <div class="ticket" id="ticket">
+        <div class="ticket__head">
+          <span>Your pizza</span>
+          <em id="ticketName">La Margherita</em>
+        </div>
+        <ul class="ticket__lines" id="ticketLines"></ul>
+        <div class="ticket__total">
+          <span>Total</span>
+          <strong>&#8377;<span id="ticketTotal">0</span></strong>
+        </div>
+        <p class="ticket__note">placeholder pricing — confirm with the kitchen</p>
+      </div>
+
+      <div class="forge__acts">
+        <button class="btn btn--fire" id="fireBtn">
+          <span class="btn__fireicon" aria-hidden="true"></span>
+          Send it into the fire
+        </button>
+        <button class="btn btn--ghost btn--sm" id="resetBtn">Clear the peel</button>
+      </div>
+
+      <div class="forge__done" id="forgeDone" hidden>
+        <p class="forge__done-k">Out of the oven</p>
+        <h3 id="doneName">La Margherita</h3>
+        <p id="doneLine"></p>
+        <a class="btn btn--fill" href="tel:07701873473">Call the kitchen &middot; 077018 73473</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MENU ══ -->
+<section class="menu" id="menu">
+  <div class="sec-head">
+    <p class="eyebrow reveal">The card</p>
+    <h2 class="sec-h2 reveal">What comes out of that oven</h2>
+  </div>
+
+  <div class="menu__bar reveal">
+    <div class="tabs" id="menuTabs" role="tablist" aria-label="Menu sections"></div>
+    <button class="vegtog" id="vegTog" aria-pressed="false">
+      <span class="vegtog__box"><span class="vegtog__dot"></span></span>
+      Vegetarian only
+    </button>
+  </div>
+
+  <ul class="menu__list" id="menuList"></ul>
+
+  <p class="menu__foot reveal">
+    Average spend runs &#8377;400&ndash;600 a head. Dishes marked
+    <span class="badge badge--loved">loved</span> are the ones reviewers keep naming.
+  </p>
+</section>
+
+<!-- ══ DOUGH TIMELINE ══ -->
+<section class="dough" id="dough">
+  <div class="sec-head">
+    <p class="eyebrow reveal">Forty-eight hours</p>
+    <h2 class="sec-h2 reveal">Nothing here is rushed</h2>
+    <p class="sec-lede reveal">Scroll it. This is the actual clock the dough keeps.</p>
+  </div>
+
+  <ol class="tl" id="timeline"></ol>
+</section>
+
+<!-- ══ THE ROOM ══ -->
+<section class="room" id="room">
+  <div class="room__grid">
+    <div class="room__copy">
+      <p class="eyebrow reveal">The room</p>
+      <h2 class="sec-h2 reveal">Low light, live music,<br>and that one sofa swing</h2>
+      <p class="sec-lede reveal">
+        Guests keep writing about the same three things — the lighting, the band,
+        and the swing everybody fights over. So: those are the three things.
+      </p>
+      <ul class="room__list">
+        <li class="reveal" style="--d:.05s"><b>Live music</b><span>most evenings, kept low enough to talk over</span></li>
+        <li class="reveal" style="--d:.12s"><b>Open-style kitchen</b><span>you can watch the oven work</span></li>
+        <li class="reveal" style="--d:.19s"><b>Herb garden on site</b><span>basil cut the same day it lands on your pizza</span></li>
+        <li class="reveal" style="--d:.26s"><b>Late tables</b><span>reviewers report warm welcomes at 10pm</span></li>
+      </ul>
+    </div>
+
+    <div class="room__art reveal">
+      <div class="swing" id="swing">
+        <svg viewBox="0 0 300 340" aria-label="A hanging sofa swing">
+          <line x1="70" y1="0" x2="78" y2="150" class="swing__rope"/>
+          <line x1="230" y1="0" x2="222" y2="150" class="swing__rope"/>
+          <rect x="52" y="150" width="196" height="24" rx="12" fill="#8B5E3C"/>
+          <rect x="60" y="126" width="180" height="30" rx="15" fill="#C9A227" opacity=".85"/>
+          <circle cx="96" cy="130" r="15" fill="#E8DCC0"/>
+          <circle cx="150" cy="126" r="16" fill="#F3EAD3"/>
+          <circle cx="204" cy="130" r="15" fill="#E8DCC0"/>
+        </svg>
+        <p class="swing__cap">give it a push</p>
+      </div>
+      <div class="viz" id="viz" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ REVIEWS ══ -->
+<section class="revs">
+  <div class="sec-head">
+    <p class="eyebrow reveal">Unedited</p>
+    <h2 class="sec-h2 reveal">Straight off Google</h2>
+  </div>
+  <div class="revs__rail" id="revsRail"></div>
+  <p class="revs__note reveal">
+    Real reviews, quoted as written. Get each reviewer's permission before
+    publishing these on the live site.
+  </p>
+</section>
+
+<!-- ══ VISIT ══ -->
+<section class="visit" id="visit">
+  <div class="visit__grid">
+    <div class="visit__block reveal">
+      <h2 class="sec-h2">Come and eat</h2>
+      <p class="visit__addr">
+        2, opposite Axis Bank,<br>Lukerganj, Prayagraj,<br>Uttar Pradesh 211001
+      </p>
+      <a class="btn btn--fill" href="tel:07701873473">077018 73473</a>
+      <div class="visit__links">
+        <a href="https://www.google.com/maps/place/Sangam+Italiano/@25.4411002,81.816763,17z" target="_blank" rel="noopener">Directions</a>
+        <a href="https://www.instagram.com/sangamitaliano/" target="_blank" rel="noopener">@sangamitaliano</a>
+      </div>
+    </div>
+
+    <div class="visit__block reveal" style="--d:.12s">
+      <h3 class="visit__h3">Hours</h3>
+      <p class="visit__tbc">
+        <b>To be confirmed.</b> The hours on the Google listing look like a
+        data-entry error, and the press release disagrees with them. Ask the
+        owner, then fill this in.
+      </p>
+      <h3 class="visit__h3">Also</h3>
+      <ul class="visit__ul">
+        <li>Dine-in &middot; takeaway &middot; delivery</li>
+        <li>&#8377;400&ndash;600 per person</li>
+        <li>Founded by Chef Kushal Gupta</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <p class="foot__mark">Sangam Italiano</p>
+  <p class="foot__small">
+    Lukerganj, Prayagraj &middot; Illustrations drawn in SVG, no stock photography.
+    <br>FSSAI licence number required here before launch.
+  </p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
