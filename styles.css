@@ -411,6 +411,8 @@ img,svg{max-width:100%}
   width:44px;height:44px;flex-direction:column;justify-content:center;gap:5px;align-items:center
 }
 .burger span{display:block;width:22px;height:2px;background:var(--cream);border-radius:2px;transition:.3s cubic-bezier(.2,.7,.3,1)}
+/* nav CTA collapses to an icon-only call button once space runs out */
+.nav__cta-ico{display:none;width:17px;height:17px}
 .nav--open .burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .nav--open .burger span:nth-child(2){opacity:0;transform:scaleX(.4)}
 .nav--open .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
@@ -419,7 +421,7 @@ img,svg{max-width:100%}
 @media(max-width:820px){
   .burger{display:flex}
   .nav{gap:10px}
-  .nav__cta{margin-left:auto;padding:9px 14px}
+  .nav__cta{margin-left:auto;padding:9px 14px;white-space:nowrap}
 
   /* drawer replaces the vanished link row */
   .nav__links{
@@ -444,10 +446,17 @@ img,svg{max-width:100%}
 @media(max-width:640px){
   :root{--pad:18px}
 
+  /* "Book a table" wrapped onto two lines and hit the logo at 375px */
+  .nav__cta-txt{display:none}
+  .nav__cta-ico{display:block}
+  .nav__cta{gap:7px;padding:10px 13px;border-radius:999px}
+  .nav__mark{font-size:18px}
+
   /* hero: let it breathe instead of forcing a viewport height */
   .hero{min-height:auto;padding-bottom:44px;padding-top:18px}
   @supports (min-height:100dvh){.hero{min-height:auto}}
   .hero__h1{font-size:clamp(40px,13.5vw,58px);letter-spacing:-.035em}
+  .hero__h1 span{margin-right:.1em}   /* .22em read as a double space at this size */
   .hero__inner{gap:26px}
   .hero__sub{font-size:15px;margin-top:18px}
   .hero__acts{margin-top:24px;gap:10px}
@@ -512,8 +521,6 @@ img,svg{max-width:100%}
 
 /* 5. Very narrow (iPhone SE / 320px) */
 @media(max-width:360px){
-  .nav__cta-txt{display:none}                   /* icon-only call button */
-  .nav__cta{padding:11px 13px}
   .hero__h1{font-size:36px}
   .tops{grid-template-columns:repeat(2,1fr)}
   .hero__stats dt{font-size:18px}
