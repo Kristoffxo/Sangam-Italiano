@@ -24,6 +24,21 @@ const onScroll = () => {
 };
 addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
+/* ── theme toggle (dark is the default) ──────────── */
+const themeTog = $('#themeTog');
+const applyTheme = t => {
+  document.documentElement.setAttribute('data-theme', t);
+  themeTog.setAttribute('aria-pressed', t === 'light');
+  themeTog.setAttribute('aria-label', t === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+};
+let theme = (() => { try { return localStorage.getItem('sangam-theme') || 'dark'; } catch (e) { return 'dark'; } })();
+applyTheme(theme);
+themeTog.addEventListener('click', () => {
+  theme = theme === 'light' ? 'dark' : 'light';
+  try { localStorage.setItem('sangam-theme', theme); } catch (e) {}
+  applyTheme(theme);
+});
+
 /* ── mobile drawer ───────────────────────────────── */
 const burger = $('#burger');
 const setNav = open => {
@@ -246,7 +261,7 @@ function unbake() {
   char.innerHTML = c;
   let s = '';
   for (let i = 0; i < 7; i++) {
-    s += `<circle cx="${rnd(120, 280).toFixed(0)}" cy="170" r="${rnd(8, 16).toFixed(0)}" fill="#F8F2E4" style="animation-delay:${(i * .34).toFixed(2)}s"/>`;
+    s += `<circle cx="${rnd(120, 280).toFixed(0)}" cy="170" r="${rnd(8, 16).toFixed(0)}" fill="var(--fg)" style="animation-delay:${(i * .34).toFixed(2)}s"/>`;
   }
   steam.innerHTML = s;
 })();

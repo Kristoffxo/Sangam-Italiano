@@ -34,8 +34,25 @@ Every push to `main` redeploys automatically.
   44px tap targets, scrollable menu tabs, `dvh` so the hero survives the
   collapsing address bar, and hover effects disabled on touch so they don't
   latch after a tap.
+- **Light / dark toggle** in the nav — dark is the default and
+  `prefers-color-scheme` is deliberately ignored, so first-time visitors always
+  land on dark. The choice persists in `localStorage` and is applied by an
+  inline script in `<head>` before first paint, so returning light-mode
+  visitors never see a dark flash.
 - Full `prefers-reduced-motion` support — every animation collapses if the
   visitor asked for that.
+
+## Theming
+
+Colours live in two token blocks at the top of `styles.css`. Surfaces and text
+are stored as **RGB triplets** (`--bg-rgb`, `--fg-rgb`) so that every
+`rgba(var(--fg-rgb), .12)` hairline and border re-themes from a single variable
+swap — there are no hardcoded colours left in the rules.
+
+Brand accents are darkened in light mode on purpose: `#D9A94E` gold and
+`#5E8F4E` basil both fail WCAG AA as text on a cream ground. Measured minimum
+contrast is **4.69:1 in dark** and **4.92:1 in light**, both above the 4.5:1 AA
+threshold for body text.
 
 ## There are no image files
 
