@@ -297,7 +297,10 @@ img,svg{max-width:100%}
 .chip em{font-style:normal;opacity:.55;margin-left:7px;font-size:11.5px}
 .chip--on em{opacity:.65}
 .chip:hover{border-color:var(--fg);color:var(--fg)}
-.chip--on{background:var(--fg);color:var(--bg);border-color:var(--fg);font-weight:500}
+/* :hover is 0,2,0 and outranked plain .chip--on (0,1,0), so hovering a
+   selected chip painted cream text on a cream fill and the label vanished.
+   Listing the hover state here keeps selection winning at equal specificity. */
+.chip--on,.chip--on:hover{background:var(--fg);color:var(--bg);border-color:var(--fg);font-weight:500}
 .tops{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:9px}
 .top{
   position:relative;background:var(--bg2);border:1px solid rgba(var(--fg-rgb),.1);border-radius:13px;
@@ -305,7 +308,8 @@ img,svg{max-width:100%}
   transition:.22s cubic-bezier(.2,.7,.3,1);overflow:hidden
 }
 .top:hover{transform:translateY(-3px);border-color:rgba(var(--fg-rgb),.34);color:var(--fg)}
-.top--on{background:rgba(94,143,78,.16);border-color:var(--basil);color:var(--fg)}
+/* same specificity trap: hovering a selected topping dropped its green outline */
+.top--on,.top--on:hover{background:rgba(94,143,78,.16);border-color:var(--basil);color:var(--fg)}
 .top svg{width:38px;height:38px}
 .top b{font-size:12px;font-weight:500;text-align:center;line-height:1.25}
 .top small{font-size:11px;color:var(--mute)}
@@ -342,7 +346,8 @@ img,svg{max-width:100%}
 .tabs{display:flex;flex-wrap:wrap;gap:7px}
 .tab{background:transparent;border:1px solid rgba(var(--fg-rgb),.2);color:var(--fg2);border-radius:999px;padding:9px 18px;font-size:13px;transition:.22s}
 .tab:hover{border-color:var(--fg);color:var(--fg)}
-.tab--on{background:var(--tomato);border-color:var(--tomato);color:#fff;font-weight:500}
+/* and again: hovering the active tab swapped #fff for near-black on tomato in light mode */
+.tab--on,.tab--on:hover{background:var(--tomato);border-color:var(--tomato);color:#fff;font-weight:500}
 .vegtog{display:inline-flex;align-items:center;gap:10px;background:none;border:0;color:var(--fg2);font-size:13px}
 .vegtog__box{width:36px;height:20px;border-radius:99px;background:rgba(var(--fg-rgb),.16);position:relative;transition:background .25s}
 .vegtog__dot{position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:var(--fg);transition:translate .25s}
