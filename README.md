@@ -18,15 +18,22 @@ Every push to `main` redeploys automatically.
 ## What's interactive
 
 - **The Forge** — pick a base, tap toppings, they land on an SVG pizza with a
-  spring animation. Live price ticker. "Send it into the fire" runs a real bake
-  sequence: flames rise, the stone climbs 24°C → 450°C, a 90-second clock runs,
-  then char spots bloom on the crust and steam lifts off.
+  spring animation. Deliberately money-free: instead of a running total you get
+  a verdict that scales with how loaded the pizza is (Purist → Classico →
+  Generous → Ambitious → *Naples would riot*), and each topping shows a flavour
+  note rather than a price. "Send it into the fire" runs a real bake sequence:
+  flames rise, the stone climbs 24°C → 450°C, a 90-second clock runs, then char
+  spots bloom on the crust and steam lifts off.
 - **Menu** — category tabs, vegetarian-only toggle, hand-drawn SVG per dish.
 - **Dough timeline** — the 48-hour ferment, revealed on scroll, dough ball
   growing at each stage.
 - **The room** — a sofa swing you can push (click it) and a music visualiser.
 - Floating basil, ember sparks off the oven, cursor glow, scroll progress bar
   as a "hunger meter".
+- **Phones**: slide-down drawer nav, icon-only call button, 3-up topping grid,
+  44px tap targets, scrollable menu tabs, `dvh` so the hero survives the
+  collapsing address bar, and hover effects disabled on touch so they don't
+  latch after a tap.
 - Full `prefers-reduced-motion` support — every animation collapses if the
   visitor asked for that.
 
@@ -52,8 +59,9 @@ Then drop them in an `assets/` folder and swap in `<img>` where you want them.
 
 These are unresolved and need the owner — see [`docs/RESEARCH.md`](docs/RESEARCH.md):
 
-- [ ] **Real menu and prices.** Every price in `app.js` is invented as a
-      placeholder. Dishes tagged `unconfirmed` may not exist at all.
+- [ ] **Real menu and prices.** Every price in the *menu section* of `app.js`
+      is invented as a placeholder. Dishes tagged `unconfirmed` may not exist at
+      all. (The pizza builder carries no prices at all, by design.)
 - [ ] **Opening hours.** Google shows `12am–12pm` + `1pm–12am` daily, which is
       almost certainly a data-entry error on the Google profile. The press
       release says 11am–10pm. They contradict each other.
